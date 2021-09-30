@@ -45,3 +45,5 @@ import './RuiSvgText.js';
 
 export { rui };
 export default rui;
+
+window.rui = rui;
