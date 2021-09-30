@@ -1,0 +1,112 @@
+/* Copyright 2021 Frank Moelendoerp */
+
+name: {
+  value: "value reference",
+  get: "getter function",
+  set: "setter function"
+  type: "Object/String/Number/Boolean/Undefined/Null/Function",
+  category: "const/method/style/variable/event",
+  help: "basic description"
+  default: "(default value)",
+  arguments:{ // optional
+    argumentName: {
+      type: "Object/String/Number/Boolean/Undefined/Null",
+      help: "basic description"
+    }
+  }
+  callbackArguments:{
+     argumentName: {
+      type: "Object/String/Number/Boolean/Undefined/Null",
+      help: "basic description"
+    }
+  }
+  returnValue: "what is the return valke" 
+  returnType: "Object/String/Number/Boolean/Undefined/Null"
+  error: "undefined or Array containg one or multiple of EvalError/"+
+         "InternalError/RangeError/ReferenceError/SyntaxError/TypeError"
+  example: "example code in an unnamed function, more description in comments"
+  writable: "is this writeable or not (defaults to true)",
+  enumerable: "will this be visible in the property dialog? (defaults to false)",
+},  
+
+category = {
+  const: {
+    desc: "Readonly member variable.",
+    //get: undefined,
+    //set: undefined,
+    value: "the value",
+    type: "Object/String/Number/Boolean/Undefined/Null",
+    //default: undefined,
+    help: "describes the basic functionality of this member function",
+    //arguments: undefined,
+    //callbackArguments: undefined,
+    //returnValue: undefined,
+    //returnError: undefined,
+    //error: undefined,
+    example: "can be provided, if it makes sense",
+    writable: false,
+  },
+  method: {
+    desc: "member function" ,
+    get: undefined,
+    set: undefined,
+    value: "the function",
+    type: Function,
+    default: undefined,
+    help: "describes the basic functionality of this member function",
+    arguments: "must be listed, if present. Otherwise undefined",
+    callbackArguments: undefined,
+    returnValue: "describe the return value of the function. undefined is allowed",
+    returnType: "set to the return type of the function",
+    error: "set accoriding to possible thrown errors",
+    example: "must be provided",
+  },
+  style: {
+    desc: "quick access to common css settings" ,
+    get: "returns the css value",
+    set: "changes the css value",
+    type: String,
+    default: "default value in most cases empty string: \"\"",
+    //value: undefined,
+    help: "Fixed text: '(property name)",
+    //arguments: undefined,
+    //callbackArguments: undefined,
+    //returnValue: undefined,
+    //returnType: undefined,
+    //error: undefined /* errors must be handled in the getter/setter*/,
+    //example: undefined,
+  },
+  variable: {
+    desc: "member variable" ,
+    get: "returns the value",
+    set: "changes the value",
+    value: undefined,
+    default: "the default value",
+    type: "Object/String/Number/Boolean/Undefined/Null"
+    help: "Fixed text: 'Quick access to the css property: (property name)",
+    arguments: undefined,
+    callbackArguments: undefined,
+    returnValue: undefined,
+    returnType: undefined,
+    error: "set accoriding to possible thrown errors",
+    example: "must be provided",
+  },
+  event: {
+    desc: "Events always starts with 'on' followed by an upper case Letter of" + 
+        " the event name. eg. onEvent",
+    get: "returns the current callback",
+    set: "changes the callback",
+    value: undefined,
+    default: Null,
+    type: Function
+    help: "Description of the event",
+    arguments: undefined,
+    callbackArguments: "must contain the argument description of the callbackk",
+    returnValue: Function,
+    returnType: undefined,
+    error: "must not throw errors",
+    example: "should be provided",
+  },
+}  
+    
+  

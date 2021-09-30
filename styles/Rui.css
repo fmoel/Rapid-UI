@@ -1,0 +1,995 @@
+/* Copyright 2021 Frank Moelendoerp */
+
+*{
+	box-sizing: border-box;	
+}
+
+html, body{
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+html{
+  height: 100%;
+}
+body{
+  min-height: 100%;
+  font: 12px arial, sans-serif;
+  background-color: lightblue;
+  overflow: hidden;
+}
+
+.RuiContainer{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.RuiSvgText{
+	user-select: none;
+}
+
+.RuiSvg > svg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.RuiGrid.RuiVisibleControl > div{
+  display: grid;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.RuiGrid > div > .RuiContainer{
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 100%;
+    height: 100%;
+}
+
+
+.RuiVisibleControl{
+  display: inline-block;
+  position: absolute;
+  overflow: hidden;
+}
+
+.RuiInvisibleConrtol{
+  display: inline-block;
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px dashed gray;
+  background-color: gainsboro;
+  font-size: 20px;
+  user-select: none;  
+}
+
+.RuiLabel{
+  padding: 5px;
+  background-color: transparent;
+}
+
+.RuiLabel:before{
+  content: attr(data-caption);
+}
+
+.RuiDialog{
+  z-index: 100;
+}
+
+.RuiMessageBoxBackLayer{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+  z-Index: 1999;
+}
+
+.RuiMessageBox{
+  width: 500px;
+  height: 150px;
+  left: calc(50vw - 250px);
+  top: calc(50vh - 75px);
+  z-index: 2000;
+}
+
+.RuiMessageBoxTextField{
+  left: 100px;
+  top: 50px;
+  right: 10px;
+  position: absolute;
+}
+
+.RuiMessageBoxIcon{
+  left: 25px;
+  top: 25px;
+  position: absolute;
+  font-size: 40px;
+}
+
+.RuiDialog.RuiActive{
+  z-index: 1000;
+}
+
+.RuiFrame{
+  border: 2px ridge #EEEEEE; 
+  padding: 5px;
+  margin: 5px;
+  background-color: gainsboro;
+}
+
+.RuiFrame:before{
+  content: attr(data-caption);
+  position: relative;
+  top: 0;
+  background-color: inherit;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.RuiComponentButton{
+  display: table;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;  
+  border: 0px solid black;
+  background-color: transparent;
+}
+
+.RuiButton, .RuiImageButton {
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  display: table;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.RuiGate{
+  border: 1px solid black;
+  background-color: white;
+  padding: 5px;
+  display: table;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.RuiImageButton{
+  padding: 3px;
+}
+
+.RuiComponentButton *{
+  pointer-events: none;
+}
+
+.RuiComponentButton > .RuiInvisibleConrtol{
+  border: 0 solid black;
+  background-color: transparent;
+}
+
+.RuiButton > SPAN, .RuiImageButton > *, .RuiComponentButton > *{
+  display: block;
+  vertical-align: middle;
+}
+
+.RuiImageButton > img{
+  display: inline-block;
+  padding: 3px;
+}
+
+.RuiButton.clicked, .RuiImageButton.clicked, .RuiComponentButton.clicked{
+  background-color: gray;
+}
+
+.RuiTable{
+  display: table;
+  padding: 0px;
+  font-size: 12px;
+}
+
+.RuiTable > * > tr, .RuiTable tr{
+  display: table-row;
+  position: unset;
+  height: unset;
+  width: unset;
+}
+
+.RuiTable td.RuiVisibleControl, .RuiTable th.RuiVisibleControl {
+  display: table-cell;
+  position: unset;
+  width: unset;
+  height: unset;
+}
+
+.RuiTable td.RuiVisibleControl:before, .RuiTable th.RuiVisibleControl:before {
+  content: attr(data-caption);
+}
+
+.RuiScrollBar{
+  background-color: lightgray;
+  border: 1px solid gainsboro;
+}
+.RuiScrollBar > .RuiEmbeddedContainer{
+  left: 0;
+  top: 0;
+}
+
+
+.RuiEmbeddedContainer{
+  height: 100%;
+  width: 100%;
+}
+
+.RuiScrollBar .RuiButton{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.RuiScrollBar .RuiButton > span{
+  width: 100%;
+  color: gray;
+}
+
+.RuiTabControl{
+}
+
+.RuiTabContainer > div{
+  height: 100%;
+  width: 100%;  
+  position: relative;
+}
+
+
+.RuiTabLabel{
+  border-left: 1px solid darkgray;
+  border-top: 1px solid darkgray;
+  position: relative;
+  background-color: gainsboro;
+}
+
+.RuiTabLabel:last-child{
+  border-right: 1px solid darkgray;
+}
+
+.RuiTabLabel:hover{
+  background-color: darkgray;
+}
+
+.RuiTabLabel.active{
+  background-color: white;
+  margin-bottom: 3px;
+}
+
+.RuiTabs{
+  border-left: 1px solid darkgray;
+  border-top: 1px solid darkgray;
+  border-bottom: 1px solid darkgray;
+  border-right: 1px solid darkgray;
+  background-color: white;  
+  margin: auto;
+  left: 0;
+  top: 25px;
+  right: 0;
+  bottom: 0;
+  height: unset;
+  width: unset;
+}
+
+.RuiLabels{
+  margin: auto;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  height: 25px;
+}
+
+.RuiTabContainer{
+  margin: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+.RuiTabContainer.active{
+  display: block;
+}
+
+.RuiProgressBar > div{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+@-webkit-keyframes moving-gradient {
+    0% { background-position: left bottom; }
+    100% { background-position: right bottom; }
+}
+
+@-webkit-keyframes stopping-gradient {
+    0% { background-position: 25% bottom; }
+    50% { background-position: 75% bottom; }
+    100% { background-position: 25% bottom; }
+}
+
+.RuiProgressBar > div{
+  overflow: hidden;
+}
+
+.RuiProgressBar > div > div{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 500px;
+  bottom: 0px;
+  background: #d0e4f7;
+  background: -moz-linear-gradient(-45deg,  #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%);
+  background: -webkit-linear-gradient(-45deg,  #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
+  background: linear-gradient(135deg,  #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=1 );
+}
+
+.RuiProgressBar > div.RuiAnimated > div{
+  background: linear-gradient(
+    left,
+    #0193CD 30%,
+    #66D4E5 80%,
+    #0193CD 100%
+  ) repeat;
+  
+  background-size: 50% 100%;
+  animation-name: moving-gradient;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.RuiProgressBar > div.RuiAnimated.RuiStopped > div{
+  background: -webkit-linear-gradient(
+    left,
+    #CD2203 30%,
+    #E56666 80%,
+    #CD2202 100%
+  ) repeat;
+  background-size: 50% 100%;
+  animation-name: stopping-gradient;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in, ease-in-out;;
+}
+
+@keyframes marquee {
+    from {
+        left:-120px;
+    }
+    to {
+        left:100%;
+    }
+}
+
+.RuiProgressBar > div.RuiMarquee > div{
+  background: linear-gradient(
+    left,
+    #0193CD 30%,
+    #66D4E5 80%,
+    #0193CD 100%
+  ) repeat;
+  -webkit-background-size: 50% 100%;
+  -webkit-animation-name: stopping-gradient;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in, ease-in-out;
+  animation: marquee 3s linear infinite;  
+  
+}
+
+.RuiProgressBar:after{
+  content: attr(data-value);
+  position: absolute;
+  margin: auto;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  padding-top: 5px;
+  background-image: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, .8) 0%,
+    rgba(255, 255, 255, .4) 50%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, .2) 100%
+  );
+}
+
+
+.RuiProgressBar{
+  border: 1px solid #adadad;
+  -webkit-border-radius: 2px;  
+  height: 30px;
+  width: 150px;
+}
+
+.RuiMessageBox{
+  border-left: 1px solid darkgray;
+  border-top: 1px solid darkgray;
+  border-bottom: 1px solid darkgray;
+  border-right: 1px solid darkgray;    
+  background-color: gainsboro;
+}
+
+.RuiMessageBoxContainer{
+  position:absolute;
+  top: 25px;
+  bottom: 0;
+  left: 0;    
+  right: 0;      
+  overflow: auto;
+}
+
+
+.RuiDialog{
+  border-left: 1px solid darkgray;
+  border-top: 1px solid darkgray;
+  border-bottom: 1px solid darkgray;
+  border-right: 1px solid darkgray;    
+  background-color: gainsboro;
+}
+
+.RuiTextArea{
+	overflow: auto;
+}
+
+.RuiTitleBar{
+  user-select: none;
+  position:absolute;
+  margin: auto;
+  top: 0;
+  height: 25px;
+  left: 0;
+  right: 0;
+  background: rgb(183,222,237); /* Old browsers */
+  background: -moz-linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, rgba(183,222,237,1) 0%,rgba(113,206,239,1) 50%,rgba(33,180,226,1) 51%,rgba(183,222,237,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, rgba(183,222,237,1) 0%,rgba(113,206,239,1) 50%,rgba(33,180,226,1) 51%,rgba(183,222,237,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', endColorstr='#b7deed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.RuiTitleIcon{
+  position:absolute;
+  top: 4px;
+  height: 16px;
+  width: 16px;
+  left: 2px;  
+}
+.RuiTitleCaption{
+  position:absolute;
+  top: 6px;
+  height: 16px;
+  left: 22px;    
+  right: 50px;    
+  overflow: hidden;
+}
+.RuiTitleMinBtn{
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    right: 56px;
+    font-size: 14px;
+}
+
+.RuiTitleMinBtn:hover{
+  background-color: gainsboro;
+}
+
+.RuiTitleMaxBtn{
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    right: 28px;
+    font-size: 14px;
+}
+
+.RuiTitleMaxBtn:hover{
+  background-color: gainsboro;
+}
+
+.RuiTitleCloseBtn{
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    right: 0;
+    font-size: 14px;
+}
+
+.RuiTitleCloseBtn:hover{
+  background-color: gainsboro;
+}
+
+.RuiDialogContainer{
+  position:absolute;
+  top: 25px;
+  bottom: 0;
+  left: 0;    
+  right: 0;      
+  overflow: auto;
+}
+
+.RuiReadOnly{
+  background-color: lightgray;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 10000;
+  margin-left: -50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+*:hover > .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.RuiRibbon > table{
+    border-spacing: 0;
+  background-color: #2B579A;
+  color: white;
+  width: 100%;
+}
+
+.RuiRibbon{
+  top: 0;
+  width: 100%;
+  height: 126px;
+  overflow: hidden;
+  background-color: #F3F2F1; 
+}
+
+.RuiRibbonLabel:hover{
+  background-color: #3060A0;   
+}
+
+.RuiRibbonLabel.active{
+  background-color: #F3F2F1;   
+  color: black;
+}
+
+.RuiRibbonLabel{
+  height: 30px;
+  overflow: hidden;
+  border: 0px;
+  position: relative;
+  vertical-align: middle;
+  padding: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 1px;
+    font-size: 13px;
+}
+.RuiRibbonContainer > div{
+  height: 100%;
+  width: 100%;  
+  position: relative;
+}
+.RuiRibbonContainer{
+  height: 96px;
+  overflow: hidden;
+  border: 0px;
+  width: 100%;
+  display:none;
+  position: static;
+}
+
+.RuiRibbonContainer.active{
+  display:block;
+}
+
+.RuiRibbonGroup:first-child{
+  padding-left: 3px;
+}
+
+.RuiRibbonGroup{
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.RuiRibbonGroup > div{
+  padding-left: 3px;
+  min-width: 80px;
+  height: calc(100% - 6px);
+  top: 3px;
+  position: relative;
+  overflow-x: initial;
+  overflow: initial;
+}
+
+.RuiRibbonGroup > div > *{ 
+  position: relative;
+  margin: 2px;
+}
+
+.RuiRibbonGroup:not(:last-child){
+  border-right: 1px solid lightgray;
+  padding-right: 3px;
+  margin-right: 3px;
+}
+
+.RuiRibbonGroup:before{
+  content: attr(data-caption);
+  bottom: 0px;
+  position:absolute;
+  right: 0;
+    left: 0;
+    text-align: center;
+}
+
+.RuiRibbon .RuiImageButton{
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.RuiRibbon .RuiImageButton:hover{
+  border: 1px solid lightskyblue;
+  background-color: lightblue;
+}
+
+.WfcChangeNotice{
+  position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+    background-color: red;
+    text-align: center;
+    padding: 40px;
+    z-index: 1000;
+    border-radius: 14px;
+    font-size: large;
+    color: white;
+  max-width: 10%;
+  max-height: 10%;
+}
+
+.RuiTreeView{
+  background-color: white;
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+.RuiTreeView div:before{
+  content: attr(data-caption);
+  margin-left: 8px;
+}
+.RuiTreeView div.RuiSelected:before{
+  border: 1px dotted gray;
+  background-color: antiquewhite;
+}
+
+.RuiTreeView div{
+  padding-left: 15px;
+}
+.RuiTreeCollapsed div{
+  display: none;
+}
+.RuiTreeView div.RuiTreeCollapsed{
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANUlEQVQoU2NkYGD4z0AYMDJCFYJoXABkEFaFYAkkXeQrxOZWuNOwuZF6VhPla0IhCQ4eogAAvNMVC0vAIJYAAAAASUVORK5CYII=);
+    background-repeat: no-repeat;
+    background-position-y: 8px;
+    background-position-x: 11px;  
+}
+.RuiTreeView div{
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAKklEQVQoU2NkYGD4z0AYMDJCFYJoXABkEI0VYnMr3GmDwI2EQhIcPEQBADS2EQuzubo1AAAAAElFTkSuQmCC);
+    background-repeat: no-repeat;
+    background-position-y: 8px;
+    background-position-x: 11px;  
+  border-left: 1px dotted gray
+}
+
+.RuiTreeView div:empty{
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIUlEQVQoU2NkIBIwEqmOgTYK/zMwgE3GS9PGaqI8Tn2rAXSRBQvP/pf9AAAAAElFTkSuQmCC);
+    background-repeat: no-repeat;
+    background-position-y: 2px;
+    background-position-x: 2px;  
+}
+
+.RuiTreeView div:not(:empty){
+  margin-top: -5px;
+    padding-top: 5px;
+}
+
+.RuiTreeView div:not(:empty):after{
+  content: "";
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIklEQVQoU2NkwAT/GRgYGNGFMQSwaAQLYVM4aiI8tIgORwB0kQULl5a7CAAAAABJRU5ErkJggg==);
+    background-repeat: repeat-y;
+    background-position-y: 2px;
+    background-position-x: 2px;
+}
+
+.RuiTreeView div:last-child{  
+}
+
+.RuiResizeBoxContainer{
+  position:absolute !important;
+  display: none;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.RuiResizeBox{
+  pointer-events: all;
+  position:absolute;
+  width: 8px;
+  border: 1px solid gray;
+  height: 8px;
+  background-color: white;
+}
+
+.RuiResizeBox:nth-child(1){left: -8; top: -8; cursor: nw-resize;}
+.RuiResizeBox:nth-child(2){left: calc(50% - 5px); top: -8; cursor: ns-resize;}
+.RuiResizeBox:nth-child(3){right: -8; top: -8; cursor: ne-resize;}
+.RuiResizeBox:nth-child(4){left: -8; top: calc(50% - 5px); cursor: ew-resize;}
+.RuiResizeBox:nth-child(5){right: -8; top: calc(50% - 5px); cursor: ew-resize;}
+.RuiResizeBox:nth-child(6){left: -8; bottom: -8; cursor: ne-resize;}
+.RuiResizeBox:nth-child(7){left: calc(50% - 5px); bottom: -8; cursor: ns-resize;}
+.RuiResizeBox:nth-child(8){right: -8; bottom: -8; cursor: nw-resize;}
+
+.RuiResizeBorderContainer{
+  position:absolute;
+  display: none;
+  pointer-events: none;
+  z-index: 10000;
+  border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.RuiResizeBorderContainer tr > td{
+  padding:0;
+}
+
+.RuiResizeBorderContainer tr:first-child > td, 
+.RuiResizeBorderContainer tr:last-child > td{
+  height: 3px;
+  cursor: ns-resize;
+  pointer-events: all;  
+}
+
+.RuiResizeBorderContainer tr:nth-child(2) > td, 
+.RuiResizeBorderContainer tr:nth-child(4) > td{
+  height: 10px;
+}
+
+.RuiResizeBorderContainer tr > td:first-child, 
+.RuiResizeBorderContainer tr > td:last-child{
+  width: 3px;
+  cursor: ew-resize;
+  pointer-events: all;  
+}
+
+.RuiResizeBorderContainer tr > td:nth-child(2), 
+.RuiResizeBorderContainer tr > td:nth-child(4){
+  width: 10px;
+}
+
+.RuiResizeBorderContainer tr:nth-child(4) > td:nth-child(5), 
+.RuiResizeBorderContainer tr:nth-child(5) > td:nth-child(5), 
+.RuiResizeBorderContainer tr:nth-child(5) > td:nth-child(4),
+.RuiResizeBorderContainer tr:nth-child(1) > td:nth-child(2), 
+.RuiResizeBorderContainer tr:nth-child(2) > td:nth-child(1), 
+.RuiResizeBorderContainer tr:nth-child(1) > td:nth-child(1){
+  cursor: nw-resize;  
+  pointer-events: all;  
+}
+
+.RuiResizeBorderContainer tr:nth-child(4) > td:nth-child(1), 
+.RuiResizeBorderContainer tr:nth-child(5) > td:nth-child(1), 
+.RuiResizeBorderContainer tr:nth-child(5) > td:nth-child(2),
+.RuiResizeBorderContainer tr:nth-child(1) > td:nth-child(4), 
+.RuiResizeBorderContainer tr:nth-child(2) > td:nth-child(5), 
+.RuiResizeBorderContainer tr:nth-child(1) > td:nth-child(5){
+  cursor: ne-resize;  
+  pointer-events: all;  
+}
+
+.RuiResizeBorderContainer2{
+  position:absolute;
+  display: none;
+  pointer-events: none;
+  z-index: 10000;
+  border-spacing: 0;
+  border-collapse: collapse;
+	width: 100%;
+	height: 100%;
+}
+
+
+/* tooltip by Youssouf El Azizi, 
+https://medium.freecodecamp.org/a-step-by-step-guide-to-making-pure-css-tooltips-3d5a3e237346 */
+
+[data-tooltip]:hover{
+  overflow: visible;
+  z-index: 9999;
+}
+[data-tooltip]:hover::after,[data-tooltip]:hover::before {
+  opacity:1;
+  transition-delay: 1.0s;
+  transition: all 0.5s;
+}
+ 
+[data-tooltip]::before {
+    content: "";
+    position: absolute;
+    top:-6px;
+    left:50%;
+    transform: translateX(-50%);
+    border-width: 4px 6px 0 6px;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.7) transparent transparent     transparent;
+    z-index: 10000;
+  opacity:0;
+}
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+  opacity:0;
+    left:50%;
+    top:-6px;
+    transform: translateX(-50%)   translateY(-100%);
+    background: rgba(0,0,0,0.7);
+    text-align: center;
+    color: #fff;
+    padding:4px 2px;
+    font-size: 12px;
+    min-width: 80px;
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 10000;
+}
+[data-tooltip-position='left']::before{
+  left:0%;
+  top:50%;
+  margin-left:-12px;
+  transform:translatey(-50%) rotate(-90deg) 
+}
+[data-tooltip-position='top']::before{
+  left:50%;
+}
+[data-tooltip-position='bottom']::before{
+  top:100%;
+  margin-top:8px;
+  transform: translateX(-50%) translatey(-100%) rotate(-180deg)
+}
+[data-tooltip-position='right']::before{
+  left:100%;
+  top:50%;
+  margin-left:1px;
+  transform:translatey(-50%) rotate(90deg)
+}
+[data-tooltip-position='left']::after{
+  left:0%;
+  top:50%;
+  margin-left:-8px;
+  transform: translateX(-100%)   translateY(-50%);
+}
+[data-tooltip-position='top']::after{
+  left:50%;
+}
+[data-tooltip-position='bottom']::after{
+  top:100%;
+  margin-top:8px;
+  transform: translateX(-50%) translateY(0%);
+}
+[data-tooltip-position='right']::after{
+  left:100%;
+  top:50%;
+  margin-left:8px;
+  transform: translateX(0%)   translateY(-50%);
+}
+
+.RuiProperties > div > table {
+	height: 0px;
+}
+
+.RuiProperties div{
+	display: inline-block;
+}
+
+.RuiProperties table{
+    border-spacing: 0;
+    border-collapse: collapse;
+  background-color: white;
+  border: 1px dotted darkgray;
+}
+
+.RuiProperties tbody{
+  padding-top: 10px;
+}
+
+.RuiReadOnly{
+  background-color: lightgray;
+}
+.RuiProperties .RuiTable td.RuiVisibleControl{
+  padding: 0;
+  padding-left: 2px;
+  border: 1px dotted darkgray;
+}
+
+.RuiProperties .RuiTable td.RuiVisibleControl:not([colspan="2"]){
+  width: 50%;
+}
+
+.RuiProperties .RuiTable td.RuiVisibleControl:last-child:not([colspan="2"]):before{
+  position: absolute;
+  white-space: nowrap;
+}
+
+.RuiProperties .RuiTable td.RuiVisibleControl[colspan="2"]{
+  font-weight: bold;
+  height: 20px;
+}
+
+.RuiProperties .RuiTable td.RuiVisibleControl[colspan="2"]:after{
+  content: attr(data-caption);
+}
+
+.RuiProperties .RuiTable > tbody:not(.RuiCollapsed) > tr > td.RuiVisibleControl[colspan="2"]:before{
+  content: "\229f";
+  margin-right: 4px;
+  font-weight: 100;
+}
+
+.RuiProperties .RuiTable > tbody.RuiCollapsed > tr > td.RuiVisibleControl[colspan="2"]:before{
+  content: "\229e";
+  margin-right: 4px;
+  font-weight: 100;
+}
+
+.RuiProperties .RuiTable > tbody.RuiCollapsed > .RuiEmpty > td.RuiVisibleControl[colspan="2"]:before{
+  content: "";
+  margin-left: 11px;
+}
+
+.RuiProperties .RuiTable td.RuiVisibleControl:first-child:not([colspan="2"]):before{
+  padding-left: 10px;
+}
+
+.RuiProperties tr.RuiActive{
+	background-color: gray;
+}
+
+.RuiProperties tbody.RuiCollapsed tr:not(:first-child){
+  display: none;
+}
+
+.RuiPropertyHover{
+  content: ".";
+  box-shadow: 0px 0px 48px 0px rgba(140,140,255,1);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index:1000;
+}
