@@ -329,11 +329,20 @@ if(typeof window.rui != 'object')
         }
       }
 
-      window.addEventListener("DOMContentLoaded", function(){
+      function installMoveableEvents(){
         document.body.addEventListener("mouseup", endMoving);
         document.addEventListener("mouseout", abortMoving);       
         document.body.addEventListener("mousemove", moving);
-      });
+      }
+      if (document.readyState === "complete" 
+        || document.readyState === "loaded" 
+        || document.readyState === "interactive") {
+          installMoveableEvents();
+      }else{
+        window.addEventListener("DOMContentLoaded", installMoveableEvents);
+      }
+      
+
       
       function getHtml(obj){
         if(obj.isClass(cls.RuiObject) && obj.html){
