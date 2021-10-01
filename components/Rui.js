@@ -322,10 +322,12 @@ if(typeof window.rui != 'object')
         }
       }
       
-      function endMoving() {
+      function endMoving(e) {
         if (dragging != null) {
           if(typeof dragging.moving.addResizer == "function") dragging.moving.addResizer();
           dragging = null;
+          e.stopImmediatePropagation();
+          e.preventDefault();
         }
       }
 
