@@ -85,15 +85,16 @@ export default function RuiMessageBox(wOParent, name, wOptions = {}, designTime 
         buttonObjects.pop().destroy();
       
       let used = 10;
-      for(let i = 0; i < buttons.length; i++){
-        if(typeof buttons[i].value != "string")
-          buttons[i].value = buttons[i].caption;  
-        let btn = new RuiButton(self, "btn" + buttons[i].value, {
+      let btns = buttons.slice().reverse();
+      for(let i = 0; i < btns.length; i++){
+        if(typeof btns[i].value != "string")
+          btns[i].value = btns[i].caption;  
+        let btn = new RuiButton(self, "btn" + btns[i].value, {
           onClick: function(){
             resolve(this.extra);
           },
-          caption: rui.xlat.getTranslated(buttons[i].caption),
-          extra: buttons[i].value,
+          caption: rui.xlat.getTranslated(btns[i].caption),
+          extra: btns[i].value,
           bottom: 10,
           height: 30,
           right: used,

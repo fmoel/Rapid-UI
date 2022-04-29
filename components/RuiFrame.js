@@ -7,7 +7,7 @@ export {RuiFrame};
 rui.registerClass(RuiFrame);
 
 export default function RuiFrame (wOParent, name, wOptions = {}, designTime = false) {
-  rui.lib.addBaseTree(this, RuiFrame);
+  rui.lib.addBaseTree(this, RuiFrame);4
   RuiContainer.call(this, wOParent, name, wOptions, designTime);
   let html = this.html;
 

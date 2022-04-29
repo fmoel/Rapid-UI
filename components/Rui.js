@@ -25,7 +25,7 @@ if(typeof window.rui != 'object')
   window.rui = new (function(){
     let gridSize = 5, lib = {}, cls = {}, moveable = {}, resizeable = {};
     let xlat = {};
-    const allowEval = false;
+    const allowEval = true;
     
     // rui.lib implementation
     Object.defineProperties(lib, {
@@ -73,6 +73,43 @@ if(typeof window.rui != 'object')
           request.open('GET', url, true); 
           request.overrideMimeType('text/plain; charset=' + charset);
           request.send(null);
+
+          request.onreadystatechange = function(){
+            if (request.readyState === 4){
+              if (request.status === 200){
+                resolve(request.responseText);
+              }else{
+                reject(request);
+              }
+            }
+          }
+        })
+      }),
+      httpRequestGet: createMethod(async function(url, charset = "UTF-8", mimeType = 'text/plain'){
+        return new Promise((resolve, reject) =>{
+          let request = new XMLHttpRequest();
+          request.open("GET", url, true); 
+          request.overrideMimeType(mimeType + '; charset=' + charset);
+          request.send(null);
+
+          request.onreadystatechange = function(){
+            if (request.readyState === 4){
+              if (request.status === 200){
+                resolve(request.responseText);
+              }else{
+                reject(request);
+              }
+            }
+          }
+        })
+      }),
+      httpRequestPost: createMethod(async function(url, postString, charset = "UTF-8", mimeType = 'text/plain'){
+        return new Promise((resolve, reject) =>{
+          let request = new XMLHttpRequest();
+          request.open("POST", url, true); 
+          request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          request.overrideMimeType(mimeType + '; charset=' + charset);
+          request.send(postString);
 
           request.onreadystatechange = function(){
             if (request.readyState === 4){

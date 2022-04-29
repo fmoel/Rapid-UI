@@ -17,11 +17,11 @@ export default function RuiOptionGroup(wOParent, name, wOptions = {}, designTime
   let props = {
     value: rui.createVariable({
       get: function() {
-        let checkedInput = document.querySelector('input[name = "' + this.path + '"]:checked');
+        let checkedInput = document.querySelector('input[name *= "' + this.path + '"]:checked');
         return (checkedInput !== null) ? checkedInput.value: "";
       },
       set: function(val) {
-        let input = document.querySelector('input[name = "' + this.path + '"][value="' + val + '"]');
+        let input = document.querySelector('input[name *= "' + this.path + '"][value="' + val + '"]');
         if(input != null) input.checked = true;
       }, 
     }),

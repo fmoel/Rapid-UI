@@ -1,4 +1,4 @@
-/* Copyright 2021 Frank Moelendoerp */
+/* Copyright 2022 Frank Moelendoerp */
 
 import rui from './Rui.js';
 import './RuiObject.js';
@@ -12,6 +12,7 @@ import './RuiDropDown.js';
 import './RuiEmbeddedContainer.js';
 import './RuiFrame.js';
 import './RuiGrid.js';
+import './RuiImage.js';
 import './RuiImageButton.js';
 import './RuiIndexContainer.js';
 import './RuiLabel.js';

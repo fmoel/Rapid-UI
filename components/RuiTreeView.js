@@ -76,7 +76,12 @@ export default function RuiTreeView(wOParent, name, wOptions = {}, designTime = 
         // create the html element, append it and set the attributes/ callback
         let el = document.createElement("div");
         el.setAttribute("data-caption", prop);
+        el.setAttribute("tabindex", "1");
         el.selPath = path;
+        if(path && path != "")
+          el.selPath = path + "." + prop;
+        else
+          el.selPath = prop;
         el.selValue = object[prop];
         root.append(el);
         el.addEventListener("click", elementClick);
@@ -134,8 +139,23 @@ export default function RuiTreeView(wOParent, name, wOptions = {}, designTime = 
     selectedPath: rui.createVariable({
       get: () => selPath,
       set: val => {
-        console.warn("TODO: RuiTreeView.selectedPath implementation missing");
-        updateView();
+        var selectedItem = Array.from(html.querySelectorAll("div")).filter(a => a.selPath == val)[0];
+        for(var item of Array.from(html.querySelectorAll("div.RuiSelected")))
+          item.classList.remove("RuiSelected");
+        if(selectedItem){
+          selectedItem.classList.add("RuiSelected");
+          selPath = val;
+          selKey = selectedItem.getAttribute("data-caption");
+          selValue = selectedItem.selValue;          
+          if(this.onClick.length)
+            this.onClick();
+          if(this.onChange.length)
+            this.onChange();
+        }else{
+          selPath = "";
+          selKey = undefined;
+          selValue = undefined;          
+        }
       }, 
     }),
     selectedKey: rui.createReadOnly( () => selKey),

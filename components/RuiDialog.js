@@ -119,6 +119,13 @@ export default function RuiDialog(wOParent, name, wOptions = {}, designTime = fa
 
   function show() {
     html.style.display = "block";
+    if(html.parentNode != null){
+      let all = html.parentNode.querySelectorAll(".RuiDialog.RuiActive");
+      for(let i = 0; i < all.length; i++){
+        all[i].classList.remove("RuiActive");
+      }
+      html.classList.add("RuiActive");
+    }
   }
 
   function hide(){

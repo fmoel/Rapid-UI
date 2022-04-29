@@ -19,7 +19,14 @@ export default function RuiOptionRadio(wOParent, name, wOptions = {}, designTime
   html.appendChild(input);
   html.appendChild(label);
 
-  input.setAttribute("name", wOParent.path);
+  var optionGroupParent = wOParent;
+  while(!optionGroupParent._base.includes(rui.cls.RuiOptionGroup) && optionGroupParent != window){
+    optionGroupParent = optionGroupParent.parent
+  }
+  if(optionGroupParent == window)
+    optionGroupParent = wOParent;
+
+  input.setAttribute("name", optionGroupParent.path);
   input.setAttribute("value", name);
 
   let props = {

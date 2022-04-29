@@ -45,6 +45,7 @@ export default function RuiRibbon(wOParent, name, wOptions = {}, designTime = fa
       labelList.push(label);
       //label.setAttribute("data-index", labels.childNodes.length - 1);
       labels.insertBefore(label, labels.lastElementChild);
+      label.style.whiteSpace = "nowrap";
       label.innerHTML = rui.xlat.getTranslated(tab.caption);
       let container, backstageObject;
       if(typeof tab.backstagePath == 'string')
@@ -58,6 +59,15 @@ export default function RuiRibbon(wOParent, name, wOptions = {}, designTime = fa
       }
       container.html.setAttribute("data-caption", rui.xlat.getTranslated(tab.caption));
       containerList[tab.name] = container;
+
+      var captionProp = {
+        caption: rui.createVariable({
+          get: () => label.innerHTML,
+          set: val => label.innerHTML = val,
+        }),
+      };
+      Object.defineProperties(container, captionProp);
+
       this[tab.name] = container;
       label.classList.add("RuiRibbonLabel");
       if(designTime) label.classList.add("RuiIdeInLayoutWindow");

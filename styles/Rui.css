@@ -613,13 +613,17 @@ body{
   padding-left: 3px;
 }
 
+.RuiRibbonGroup > *{
+  margin: 2px;
+}
+
 .RuiRibbonGroup{
   height: 100%;
   width: 100%;
   position: relative;
 }
 
-.RuiRibbonGroup > div{
+.RuiRibbonContainer > div{
   padding-left: 3px;
   min-width: 80px;
   height: calc(100% - 6px);
