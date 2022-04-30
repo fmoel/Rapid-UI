@@ -12,7 +12,7 @@ export default function RuiCheckBox(wOParent, name, wOptions = {}, designTime = 
   wOptions.nodeName = "label";
   RuiVisibleControl.call(this, wOParent, name, wOptions, designTime);
   let html = this.html;
-  html.classList.add("RuiTextBox");
+  html.classList.add("RuiCheckBox");
   let input = document.createElement("input");
   let label = document.createElement("span");
 

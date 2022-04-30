@@ -133,8 +133,8 @@ export default function RuiTabControl(wOParent, name, wOptions = {}, designTime 
   
   function setActiveTab(tabName){
     if(typeof labels["labelOf_" + tabName] == "object"){
-      labels["labelOf_" + tabName].click();
-    }    
+      labels["labelOf_" + tabName].html.click();
+    }
   }
   
   // set the object public object properties 
@@ -143,7 +143,7 @@ export default function RuiTabControl(wOParent, name, wOptions = {}, designTime 
       get: function() {
         let active = labels.html.querySelector("div.active");
         if(active != null)
-          return Array.prototype.indexOf.call(active.parentNode.children, active);
+          return [...active.parentNode.children].indexOf(active);
         return null;
       }, 
       set: function(val) {
@@ -151,7 +151,17 @@ export default function RuiTabControl(wOParent, name, wOptions = {}, designTime 
         if(lbl) lbl.click();
       }, 
     }),
-    activeTab: rui.createReadOnly( () => lastContainer),
+    //activeTab: rui.createReadOnly( () => lastContainer),
+    activeTab: rui.createVariable({
+      get: function() {
+        let activeNode = labels.html.querySelector("div.active");
+        var index = 0;
+        if(activeNode)
+          index = [...activeNode.parentNode.children].indexOf(activeNode);
+        return index;
+      }, 
+      set: val => setActiveTab(val), 
+    }),    
     tabs: rui.createConstant(tabs),
     labels: rui.createConstant(labels),
     tabPosition: rui.createVariable({

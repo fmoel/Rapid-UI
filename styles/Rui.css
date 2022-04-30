@@ -457,6 +457,11 @@ body{
 	overflow: auto;
 }
 
+.RuiCheckBox > span{
+  position: relative;
+  top: -2px;  
+}
+
 .RuiTitleBar{
   user-select: none;
   position:absolute;

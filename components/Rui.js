@@ -804,6 +804,7 @@ if(typeof window.rui != 'object')
                 if(typeof e != "object")
                   e = {};
                 e.name = eventType; 
+                e.self = self;
                 self._events[eventType][event].call(self, e);
               }
             };
